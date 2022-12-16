@@ -49,6 +49,7 @@ app.use(cookieParser());
 // Now we will add three end points
 
 app.get('/', (req,res)=>{
+    req.session.isAuth = true;
     session = req.session;
     if(session.userid){
         res.send("Welcome User<a href=\'/logout'>Click to log out</a>")
@@ -60,8 +61,9 @@ app.get('/', (req,res)=>{
 app.post('/user',(req,res) => {
     if(req.body.username == userName && req.body.password == passWord){
         session=req.session;
-        session.userid=req.body.username;
+        session.userid=req.body.username;0
         console.log(req.session)
+        console.log(req.session.id)
         res.send("Hey there, welcome <a href=\'/logout'>click to logout</a>");
     }
     else{
